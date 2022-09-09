@@ -1,12 +1,21 @@
-import express, { application } from 'express';
+import express, { Application } from 'express';
+
+
+// Creamos el alias la ruta de Usuarios
+import userRoutes from '../routes/usuarios.routes';
 
 import morgan from 'morgan'; // Procesa los datos antes de que llegue a las rutas
 
 class Server {
 
     // Propidades de la clase
-    private app = application;
+    private app: Application;
     private port: string;
+
+    // Creando paths de las rutas
+    private apiPaths = {
+        usuarios: '/api' // localhost:8000/api/usuarios
+    }
 
     constructor() {
         this.app = express();
@@ -19,19 +28,9 @@ class Server {
         // 2.- This middlerares
         this.middlewares();
 
-        // 3.- Definir rutas
-        // this.routes();
+        // 3.- Definir mis rutas
+        this.routes();
     }
-
-    /**
-     * listen
-     */
-    public listen() {
-        this.app.listen(this.port, () => {
-            console.log('Servidor corriendo en el Puerto: ' + this.port);
-        });
-    }
-
 
     // 2.- Para parsear el BODY
     // Son metodos que se ejecutan antes de que se pase a una ruta
@@ -45,9 +44,27 @@ class Server {
         // 3.- Configurando la carpeta publica
         // this.app.use(express.static('public'));
 
-        // 4.- Morgan
+    }
+
+    /**
+     * PUBLIC ROUTES ES UN middlewares
+     */
+    public routes() {
+
+        // Morgan
         this.app.use(morgan('dev'));
 
+        this.app.use(this.apiPaths.usuarios, userRoutes);
+
+    }
+
+    /**
+     * listen
+     */
+    public listen() {
+        this.app.listen(this.port, () => {
+            console.log('Servidor corriendo en el Puerto: ' + this.port);
+        });
     }
 
 }
