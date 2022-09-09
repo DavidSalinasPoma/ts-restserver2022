@@ -1,0 +1,92 @@
+# Proyecto POS sistema de punto de ventas con nodeJS
+
+# Crear la carpeta src en la raiz del proyecto
+
+# Instalar typescript de form global
+
+1.- npm i -g typescript
+
+# Crear proyecto NodeJS
+
+2.- npm init -y
+
+# Para compilar proyectos TS
+
+3.- tsc --init
+Configurar el tsconfig.json
+
+# TSlint para verificar errores para seguir estandares de desarrollo
+
+4.- npm i tslint --save-dev
+
+# Instalar TS de manera local para trabajar con el tslint
+
+5.- npm i typescript --save-dev
+
+# Inicializar el archivo TSlint.json
+
+6.- ./node_modules/.bin/tslint --init
+
+# Creacion del Servidor de express
+
+7.- creamos una carpeta models y dentro un archivo server.ts
+
+# Intalacion de paquetes necesarios para configurar el server.ts
+
+8.- npm i express cors dotenv
+
+# Instalar dependencia types de desarrollo
+
+9.- npm i --save-dev @types/express y npm i --save-dev @types/cors
+
+10.- Configurar el server.ts y el app.ts
+
+# Nodemos y ts --watch, Ejecutar dos comandos al mismo tiempo con el modulo npm i concurrently
+
+-- npm i concurrently -D
+-- npm i nodemon -D
+"scripts": {
+"dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\""
+},
+
+# Morgan permite ver por consola la peticiones que van llegando, configurar en el server.ts
+
+-- npm i morgan
+// 2.- Para parsear el BODY
+// Son metodos que se ejecutan antes de que se pase a una ruta
+public middlewares() {
+// 1.- CORS
+// this.app.use(cors());
+
+        // 2.-Lectura del BODY para que funcione potsman y entienda los formatos JSON
+        // this.app.use(express.json());
+
+        // 3.- Configurando la carpeta publica
+        // this.app.use(express.static('public'));
+
+        // 4.- Morgan
+        this.app.use(morgan('dev'));
+
+    }
+
+# Configurando Modelos, controladores y rutas de la aplicación
+
+13.- Craer carpeta models, controller y usuarios
+
+# Midlewares necesarios para la aplicación para trabajar con postman
+
+14.- // CORS
+this.app.use(cors());
+
+        //Lectura del BODY para que funcione potsman
+        this.app.use(express.json());
+
+# Crear la carpeta publica
+
+15.- Crear en el directorio raiz public
+
+# Instalación, conexion y configuración de MYSQL
+
+16.- Crear la base de datos en laragon
+17.- npm install --save sequelize
+18.- npm i mysql2
